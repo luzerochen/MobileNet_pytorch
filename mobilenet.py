@@ -12,7 +12,8 @@ class DepthwiseSeparableConv(nn.Module):
         out_channels: Number of channels produced by the convolution
         kernel_size: Size of the convolving kernel
         stride: Stride of the convolution.
-        width_multiplier: The hyper-parameter introduced by Google's paper(https://arxiv.org/abs/1704.04861) uses to control the model's width(the channel)
+        width_multiplier: The hyper-parameter introduced by Google's paper(https://arxiv.org/abs/1704.04861) uses to 
+                          control the model's width(the channel)
     """
     def __init__(self, in_channels, out_channels, kernel_size=3, stride=1, width_multiplier=1):
         super(DepthwiseSeparableConv, self).__init__()
@@ -20,7 +21,8 @@ class DepthwiseSeparableConv(nn.Module):
         in_channels = round(in_channels*width_multiplier)
         out_channels = round(out_channels*width_multiplier)
         
-        self.depthwise = nn.Conv2d(in_channels, in_channels, kernel_size=kernel_size, stride=stride, padding=1, groups=in_channels, bias=False)
+        self.depthwise = nn.Conv2d(in_channels, in_channels, kernel_size=kernel_size, stride=stride, padding=1,
+                                   groups=in_channels, bias=False)
         self.batchnorm0 = nn.BatchNorm2d(in_channels)
         
         self.pointwise = nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=False)
@@ -48,7 +50,8 @@ class MobileNet(nn.Module):
     Args:
         in_channels: Number of channels in the input data
         num_classes: Number of classes want to classify
-        width_multiplier: The hyper-parameter introduced by Google's paper(https://arxiv.org/abs/1704.04861) uses to control the model's width(the channel)
+        width_multiplier: The hyper-parameter introduced by Google's paper(https://arxiv.org/abs/1704.04861) uses to 
+                          control the model's width(the channel)
         
     Return:
         logits: the result after softmax activation
