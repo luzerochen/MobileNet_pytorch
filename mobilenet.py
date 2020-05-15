@@ -79,7 +79,7 @@ class MobileNet(nn.Module):
         self.layer9 = self._make_layer(1024, 1024, width_multiplier=width_multiplier)
         
         self.avgpool = nn.AdaptiveAvgPool2d((1,1))
-        self.fc = nn.Linear(1024, num_classes)
+        self.fc = nn.Linear(round(1024*width_multiplier), num_classes)
         self.softmax = nn.Softmax(dim=1)
         
     def forward(self, x):
